@@ -1,6 +1,6 @@
 package Model;
 
-public class Person {
+public class Person  {
 	// data member
 	private String Name;
 	private String Email;
