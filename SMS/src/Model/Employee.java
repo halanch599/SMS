@@ -16,9 +16,9 @@ public class Employee extends Person {
 	public long getEmployeeId() {
 		return EmployeeId;
 	}
-	public void setEmployeeId(long employeeId) {
-		EmployeeId = employeeId;
-	}
+//	public void setEmployeeId(long employeeId) {
+//		EmployeeId = employeeId;
+//	}
 	public long getRoleId() {
 		return RoleId;
 	}
@@ -29,6 +29,8 @@ public class Employee extends Person {
 		return HireDate;
 	}
 	public void setHireDate(String hireDate) {
+		// 2020
+		//validation dogrulaamk
 		HireDate = hireDate;
 	}
 	public float getSalary() {

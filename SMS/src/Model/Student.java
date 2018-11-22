@@ -6,9 +6,28 @@ import java.util.ArrayList;
 import DAL.DataAccess;
 
 public class Student extends Person {
-	private long	StudentId;
+	private long StudentId;
 	private long ClassId;
 	private long DepartmentId;
+	
+	public long getStudentId() {
+		return StudentId;
+	}
+
+	
+	public long getDepartmentId() {
+		return DepartmentId;
+	}
+	public void setDepartmentId(long departmentId) {
+		DepartmentId = departmentId;
+	}
+	public long getClassId() {
+		return ClassId;
+	}
+	public void setClassId(long classId) {
+		ClassId = classId;
+	}
+	
 	
 	public int addStudent(Student std) throws Exception
 	{
@@ -57,4 +76,5 @@ public class Student extends Person {
 		return null;
 	}
 
+	
 }
