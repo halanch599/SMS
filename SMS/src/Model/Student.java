@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import DAL.DataAccess;
 
 public class Student extends Person {
- private long	StudentId;
-private long ClassId;
+	private long	StudentId;
+	private long ClassId;
 	private long DepartmentId;
 	
 	public int addStudent(Student std) throws Exception
