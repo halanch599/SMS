@@ -34,6 +34,7 @@ public class DataAccess {
 		//con = DriverManager.getConnection(url, "root", "mysql");
 		//st = con.createStatement();
 		
+		// yeni edlke
 		
 		//3. Use this code for connection to Sqlite 
 		//String url ="jdbc:sqlite:C:\\Users\\akhtar.jamil\\eclipse-workspace\\sms.sqlite";

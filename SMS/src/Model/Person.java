@@ -11,7 +11,7 @@ public class Person {
 	private String MobileNo;
 	private long CountryID;
 	
-	//data hiding / Encapsulation
+	//data hiding or Encapsulation
 	// get and setter properties
 	public void setName(String name){
 		Name =name;
