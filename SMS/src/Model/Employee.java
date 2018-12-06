@@ -1,5 +1,6 @@
 package Model;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import DAL.DataAccess;
@@ -7,10 +8,10 @@ import DAL.DataAccess;
 public class Employee extends Person {
 	//data members
 	private long EmployeeId;
-	private long RoleId;
+	private String Role;
 	private String HireDate;
 	private float Salary;
-	private long ETypeId;
+	private String EployeeType;
 	
 	// properties for get and set
 	public long getEmployeeId() {
@@ -19,11 +20,11 @@ public class Employee extends Person {
 //	public void setEmployeeId(long employeeId) {
 //		EmployeeId = employeeId;
 //	}
-	public long getRoleId() {
-		return RoleId;
+	public String getRole() {
+		return Role;
 	}
-	public void setRoleId(long roleId) {
-		RoleId = roleId;
+	public void setRole(String role) {
+		Role = role;
 	}
 	public String getHireDate() {
 		return HireDate;
@@ -39,18 +40,25 @@ public class Employee extends Person {
 	public void setSalary(float salary) {
 		Salary = salary;
 	}
-	public long getETypeId() {
-		return ETypeId;
+	
+	public String getEployeeType() {
+		return EployeeType;
 	}
-	public void setETypeId(long eTypeId) {
-		ETypeId = eTypeId;
+	public void setEployeeType(String eployeeType) {
+		EployeeType = eployeeType;
+	}
+	// Methods
+	@Override
+	public ResultSet Login(String email, String password) throws Exception {
+		DataAccess da = new DataAccess();
+		String sql = String.format("select * from employee where email='%s' and password='%s'",email, password);
+		return da.ExecuteQuery(sql);
 	}
 	
-	// Methods
 	public int  addEmployee(Employee e) throws Exception {
 		String query =String.format("insert into Employee(Name" + 
 				",Address,Email,Password,Gender,DateOfBirth,MobileNo" + 
-				",CountryID,HireDate,Salary,RoleID,EmployementTypeID)"
+				",Country,HireDate,Salary,Role,EmployementType)"
 				+ "values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')",
 				e.getName()
 				,e.getAddress()
@@ -59,11 +67,11 @@ public class Employee extends Person {
 				,e.getGender()
 				,e.getDateofBirth()
 				,e.getMobileNo()
-				,e.getCountryID()
+				,e.getCountry()
 				,e.getHireDate()
 				,e.getSalary()
-				,e.getRoleId()
-				,e.getETypeId());
+				,e.getRole()
+				,e.getEployeeType());
 		DataAccess da = new DataAccess();
 		return da.ExecuteUpdate(query);
 	}
@@ -75,7 +83,7 @@ public class Employee extends Person {
 	public int  updateEmployees(Employee e) throws Exception {
 		String query =String.format("update Employee set Name=%s " + 
 				",Address = %s,Email=%s,Password=%s,Gender=%s,DateOfBirth=%s,MobileNo=%s" + 
-				",CountryID=%s,HireDate=%s,Salary=%s,RoleID=%s,EmployementTypeID=%s"+
+				",Country=%s,HireDate=%s,Salary=%s,Role=%s,EmployementType=%s"+
 				" where employeeId =%s",
 				e.getName()
 				+e.getAddress()
@@ -83,16 +91,18 @@ public class Employee extends Person {
 				+e.getGender()
 				+e.getDateofBirth()
 				+e.getMobileNo()
-				+e.getCountryID()
+				+e.getCountry()
 				+e.getHireDate()
 				+e.getSalary()
-				+e.getRoleId()
+				+e.getRole()
 				+e.getEmployeeId());
 		DataAccess da = new DataAccess();
 		return da.ExecuteUpdate(query);
 	}
-	public void listEmployee() {
-		
+	public ResultSet listEmployee() throws Exception {
+		String query ="select * from employee"; 
+		DataAccess da = new DataAccess();
+		return da.ExecuteQuery(query);
 	}
 	public void  searchByName(String name) {
 		

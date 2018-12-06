@@ -27,8 +27,15 @@ public class Student extends Person {
 	public void setClassId(long classId) {
 		ClassId = classId;
 	}
-	
-	
+
+	@Override
+	public ResultSet Login(String email, String password) throws Exception {
+		DataAccess da = new DataAccess();
+		String sql = String.format("select * from student where email='%s' and password='%s'",email, password);
+		return da.ExecuteQuery(sql);
+	}
+
+
 	public int addStudent(Student std) throws Exception
 	{
 		String sql = "insert into student ";
@@ -47,13 +54,13 @@ public class Student extends Person {
 	{
 		return 0;
 	}
-	public ArrayList<Student> searchByName(String name)
+	public ResultSet searchByName(String name)
 	{
-		return new ArrayList<Student>();
+		return null;
 	}
-	public ArrayList<Student> searchByID(long id)
+	public ResultSet searchByID(long id)
 	{
-		return new ArrayList<Student>();
+		return null;
 	}
 	public ResultSet searchByClass(String name,long classId)
 	{

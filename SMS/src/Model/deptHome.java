@@ -53,7 +53,7 @@ public class deptHome extends JFrame {
 	 */
 	public deptHome() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 820, 618);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -64,6 +64,11 @@ public class deptHome extends JFrame {
 		menuBar.add(mnFile);
 		
 		JMenuItem mntmClose = new JMenuItem("Close");
+		mntmClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		mnFile.add(mntmClose);
 		
 		JMenu mnDepartment = new JMenu("Department");
@@ -232,7 +237,7 @@ public class deptHome extends JFrame {
 					
 					department d = new department();
 					d.setName(name);
-				int result=	d.addDepartment(d);
+				int result=	d.addDepartment(d.getName());
 				if(result>0) {
 					lblAddMessage.setText("Department added");
 					lblAddMessage.setForeground(Color.green);

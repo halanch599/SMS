@@ -2,6 +2,8 @@ package Model;
 
 import java.sql.ResultSet;
 
+import javax.swing.JOptionPane;
+
 import DAL.DataAccess;
 
 public  class department {
@@ -10,9 +12,6 @@ public  class department {
 	
 	public int getId() {
 		return Id;
-	}
-	public void setId(int id) {
-		Id = id;
 	}
 	public String getName() {
 		return Name;
@@ -30,10 +29,10 @@ public  class department {
 		Name = name;
 	}
 	
-	public int addDepartment(department d) throws Exception
+	public int addDepartment(String name) throws Exception
 	{
 		DataAccess da = new DataAccess();
-		String query = String.format("insert into department(name) values('%s')",d.getName());
+		String query = String.format("insert into department(name) values('%s')",name);
 		return da.ExecuteUpdate(query);
 	}
 	
@@ -63,7 +62,10 @@ public  class department {
 	public ResultSet searchDepartmentByName(String name) throws Exception
 	{
 		DataAccess da = new DataAccess();
-		String query = String.format("select * from department where Name ='%s%'",name);
+		//String query = String.format("select * from department where Name like '%s%'",name);
+		
+		String query = "select * from department where Name like '" + name + "%'";
+		//JOptionPane.showMessageDialog(null,query);
 		return da.ExecuteQuery(query);
 	}
 	public ResultSet viewDepartment() throws Exception

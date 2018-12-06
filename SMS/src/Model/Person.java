@@ -1,5 +1,7 @@
 package Model;
 
+import java.sql.ResultSet;
+
 public class Person  {
 	// data member
 	private String Name;
@@ -9,7 +11,7 @@ public class Person  {
 	private String Gender;
 	private String DateofBirth;
 	private String MobileNo;
-	private long CountryID;
+	private String Country;
 	
 	//data hiding or Encapsulation
 	// get and setter properties
@@ -55,16 +57,16 @@ public class Person  {
 	public void setMobileNo(String mobileNo) {
 		MobileNo = mobileNo;
 	}
-	public long getCountryID() {
-		return CountryID;
+	public String getCountry() {
+		return Country;
 	}
-	public void setCountryID(long countryID) {
-		CountryID = countryID;
+	public void setCountry(String country) {
+		Country = country;
 	}	
 	
-	public void Login(String email, String password)
+	public ResultSet Login(String email, String password)throws Exception
 	{
-		
+		return null;
 	}
 
 	public void Logout()
