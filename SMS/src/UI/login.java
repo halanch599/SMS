@@ -153,6 +153,10 @@ public class login extends JFrame {
 						
 						if(rs.next()) {
 							empHome home = new  empHome();
+							home.setName(rs.getString("Name"));
+							home.setID(rs.getInt("EmployeeID"));
+							home.displayName();
+							
 							home.setExtendedState(MAXIMIZED_BOTH);
 							home.setVisible(true);
 							dispose();
