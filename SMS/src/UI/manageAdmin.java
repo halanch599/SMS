@@ -108,6 +108,11 @@ public class manageAdmin extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
+		JLabel lblMessage = new JLabel("");
+		lblMessage.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblMessage.setBounds(99, 13, 199, 26);
+		panel.add(lblMessage);
+		
 		JLabel lblImage = new JLabel("");
 		lblImage.setIcon(new ImageIcon("C:\\imagedata\\0.jpg"));
 		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -139,8 +144,9 @@ public class manageAdmin extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				try {
+				lblMessage.setText("");
 					int rowindex  = tableAdmin.getSelectedRow();
-					if(rowindex>-1)
+					if(rowindex>=0)
 					{
 						 tfName.setText(tableAdmin.getValueAt(rowindex, 1).toString());
 						 tfSalary.setText(tableAdmin.getValueAt(rowindex, 2).toString());
@@ -149,27 +155,17 @@ public class manageAdmin extends JFrame {
 						 // System.out.println(imgpath);
 						 lblImage.setIcon(new ImageIcon(imgpath));
 						 savepath =  imgpath;
-						 //System.out.println(tableAdmin.getValueAt(rowindex, 2).toString());
-						 
+ 
 					}
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null,e.getMessage());
 				}
 			}
 		});
-		tableAdmin.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableAdmin.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		tableAdmin.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tableAdmin.setBounds(12, 13, 446, 323);
 		scrollPane.setViewportView(tableAdmin);
-		//panel_1.add(tableAdmin);
-		
-		
-		
-		
-		JLabel lblMessage = new JLabel("");
-		lblMessage.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMessage.setBounds(99, 13, 199, 26);
-		panel.add(lblMessage);
 		
 		tfName = new JTextField();
 		tfName.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -201,28 +197,26 @@ public class manageAdmin extends JFrame {
 					String name =tfName.getText().trim();
 					double salary = Double.parseDouble(tfSalary.getText().trim());
 					
-					if(name=="")
+					if(name.isEmpty())
 					{
 						lblMessage.setText("Enter name");
 						tfName.requestFocus();
 						return;
 					}
 					
-					if(tfSalary.getText().trim()=="")
+					if(tfSalary.getText().trim().isEmpty())
 					{
 						lblMessage.setText("Enter salary");
 						tfSalary.requestFocus();
 						return;
 					}
-					
-					
-					
+								
 					Admin adm = new Admin();
 					adm.setImagePath(defaultImage);
 					adm.setName(name);
 					adm.setSalary(salary);
 					
-					if(savepath!="")
+					if(!savepath.isEmpty())
 					{
 						ImageIcon icon = (ImageIcon)lblImage.getIcon();
 						Image image = icon.getImage();
@@ -239,6 +233,8 @@ public class manageAdmin extends JFrame {
 					{
 						lblMessage.setText("admin Added.");
 						lblMessage.setForeground(Color.GREEN);
+						
+						// gostermek
 						ResultSet rs =  adm.viewAdmin();
 						tableAdmin.setModel(myUtils.buildTableModel(rs));
 					}
@@ -275,7 +271,7 @@ public class manageAdmin extends JFrame {
 						a.setName(Name);
 						a.setSalary(salary);
 						
-						if(savepath!="")
+						if(!savepath.isEmpty())
 						{
 							ImageIcon icon = (ImageIcon)lblImage.getIcon();
 							Image image = icon.getImage();
@@ -291,11 +287,10 @@ public class manageAdmin extends JFrame {
 						{
 							lblMessage.setText("Updaetd successfully");
 							lblImage.setForeground(Color.GREEN);
+							
 							ResultSet rs =  a.viewAdmin();
 							tableAdmin.setModel(myUtils.buildTableModel(rs));
-							
-							
-							
+									
 						}
 						
 					}
@@ -365,8 +360,10 @@ public class manageAdmin extends JFrame {
 						try {
 							File file=new File(fc.getSelectedFile().getAbsolutePath());
 							Image  image = ImageIO.read(file);
+							
 							Image newImage =image.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 							lblImage.setIcon(new ImageIcon(newImage));
+							
 							String id = UUID.randomUUID().toString();
 							savepath = parent + id + ".jpg";
 							//System.out.println("First " + savepath);
@@ -377,9 +374,7 @@ public class manageAdmin extends JFrame {
 				}
 				
 			}
-			
-			
-		});
+	});
 		btnNewButton_1.setBounds(12, 205, 78, 25);
 		panel.add(btnNewButton_1);
 	}
